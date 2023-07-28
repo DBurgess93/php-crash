@@ -1,26 +1,9 @@
 <?php include 'inc/header.php' ?>
 
 <?php
-$feedback = [
-  [
-    'id' => '1',
-    'name' => 'Tom Rom',
-    'email' => 'tom@email.com',
-    'body' => 'Im a goofy goober yeah'
-  ],
-  [
-    'id' => '2',
-    'name' => 'Flom Rom',
-    'email' => 'flom@email.com',
-    'body' => 'You dont need a licence to drive a sandwich'
-  ],
-  [
-    'id' => '3',
-    'name' => 'Clom Rom',
-    'email' => 'clom@email.com',
-    'body' => 'My eyes! i cant feel my eyes!'
-  ],
-];
+  $sql = 'SELECT * FROM feedback';
+  $result = mysqli_query($conn, $sql);
+  $feedback = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <h2>Past Feedback</h2>
@@ -35,6 +18,9 @@ $feedback = [
       <?php echo $item['body']; ?>
       <div class="text-secondary mt-2">
         By <?php echo $item['name']; ?>
+        <br>
+        <?php echo date_format(date_create($item['date']), "Y/m/d") ?>
+        <i><?php echo date_format(date_create($item['date']), "H:i") ?></i>
       </div>
     </div>
   </div>
